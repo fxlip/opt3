@@ -4,6 +4,16 @@
 <script src="/assets/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/assets/js/jquery-latest.min.js"></script>
 
+<!-- O tema cobre a tela com um overlay branco (body::after) que só some quando
+     o <body> recebe a classe "is-in". Revela a página assim que ela carrega. -->
+<script>
+    (function () {
+      function revealPage() { document.body.classList.add('is-in'); }
+      if (document.readyState === 'complete') { revealPage(); }
+      else { window.addEventListener('load', revealPage); }
+    })();
+</script>
+
 <script>
     /* navbar toggler script for header starts */
     function navbartoggle(x) {
