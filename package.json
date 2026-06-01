@@ -1,0 +1,10 @@
+{
+  "name": "opt3-dante",
+  "private": true,
+  "description": "Dante Jekyll bookshop template - dependências de build PostCSS",
+  "devDependencies": {
+    "postcss": "^8.3.5",
+    "postcss-cli": "^8.3.1",
+    "postcss-fluidvars": "^1.1.1"
+  }
+}

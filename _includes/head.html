@@ -1,0 +1,114 @@
+{% assign general_settings = site.data.general %}
+
+{% if page.title %}
+	{% capture title  %}
+		{{page.title}} | {{ general_settings.website_title }}
+	{% endcapture %}
+{% else %}
+	{% assign title = general_settings.website_title %}
+{% endif %}
+
+
+{% assign favicon = general_settings.site_icon_image %}
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- Primary Meta Tags -->
+	<title>{{ title }}</title>
+	<meta name="title" content="{{ title }}">
+	
+
+	{% if page.seo.page_description %}
+	<meta name="description" content="{{ page.seo.page_description }}">
+	<meta property="og:description" content="{{ page.seo.page_description }}">	
+	<meta property="twitter:description" content="{{ page.seo.page_description }}">
+	{% else %}
+	<meta name="description" content="{{ general_settings.description }}">
+	<meta property="og:description" content="{{ general_settings.description }}">
+	<meta property="twitter:description" content="{{ general_settings.description }}">
+	{% endif %}
+	
+
+	{% if page.seo.open_graph_type %}
+	<meta property="og:type" content="{{ page.seo.open_graph_type }}">
+
+	{% else %}
+	<meta property="og:type" content="website">
+	{% endif %}
+
+
+	<meta property="og:title" content="{{ title }}">
+	<meta property="og:url" content="{{ general_settings.website_url }}{{ page.url | remove: ".html" }}">
+
+
+	{% if page.seo.canonical_url %}
+
+	<link rel="canonical" href="{{ .page.seo.canonical_url }}">
+
+	{% else %}
+
+	<link rel="canonical" href="{{site.url}}">
+
+	{% endif %}
+
+	
+	{% if page.seo.featured_image %}
+
+	<meta property="og:image" content="{{ page.seo.featured_image }}">
+	<meta property="twitter:image" content="{{ page.seo.featured_image }}">
+	{% else %}
+	<meta property="og:image" content="{{general_settings.website_url}}{{ favicon }}">
+	<meta property="twitter:image" content="{{ general_settings.website_url }}{{ favicon }}">
+	{% endif %}
+
+	<!-- Twitter -->
+
+	{% if page.seo.twitter_handle %}
+
+	<meta name="twitter:creator" content="{{ page.seo.twitter_handle }}">
+
+	{% else %}
+
+	<meta name="twitter:creator" content="{{ general_settings.twitter_handle }}">
+
+	{% endif %}
+
+
+	<meta property="twitter:card" content="summary_large_image">
+	<meta property="twitter:url" content="{{ general_settings.website_url }}{{ page.url | remove: ".html" }}">
+	<meta property="twitter:title" content="{{ title }}">
+
+	<script type="application/ld+json">
+		{
+			"@context": "https://schema.org",
+			"@type": "website",
+			"name": "{{ general_settings.website_title }}",
+			"image": "{{ general_settings.website_url }}{{ general_settings.site_icon_image }}",
+			"logo": "{{ general_settings.website_url }}{{general_settings.logo_image }}",
+			"url": "{{ general_settings.website_url }}",
+		}
+	</script>
+	<!-- favicon -->
+	<link rel="icon" href="{{ favicon }}" type="image/png" sizes="16x16">
+	<!-- touch-icons -->
+	<link rel="shortcut icon" href="{{ favicon }}">
+	<link rel="apple-touch-icon-precomposed" href="{{ favicon }}">
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{ favicon }}">
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{ favicon }}">
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ favicon }}">
+	<!-- main css -->
+	<link rel="stylesheet" href="{{ "/assets/main.css" | prepend: site.baseurl }}">
+	<!-- fontawesome css -->
+	<link rel="stylesheet" href="/assets/css/lib/fontawesome/all.css" type="text/css" media="screen" />
+	<!-- bootstrap jquery -->
+	<script src="/assets/js/jquery-3.3.1.slim.min.js"></script>
+	<!-- google fonts -->
+	{% if general_settings.fonts %}
+		{% for fonts in general_settings.fonts %}
+			<link href="{{ fonts.font_style_url }}" rel="stylesheet">
+		{% endfor %}
+	{% endif %}
+</head>
